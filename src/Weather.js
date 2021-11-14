@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import "./Weather.css";
 import axios from "axios";
+import FormattedDate from "./FormattedDate";
 
-export default function Weather(){
+export default function Weather(props){
 const [weatherData, setweatherData]=useState({ready:false});
 function handleReponse(response){
     setweatherData({
@@ -13,7 +14,7 @@ function handleReponse(response){
         wind: response.data.wind.speed,
         description: response.data.weather[0].description,
         icon: `https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png`,
-        date: `Saturday 16:00`,
+        date: new Date(response.data.dt * 1000),
         
     })
     ;
@@ -35,7 +36,9 @@ return (
             </form>
             <h1>{weatherData.name}</h1>
             <ul>
-                <li>{weatherData.date}</li>
+                <li>
+                    <FormattedDate date={weatherData.date} />
+                </li>
                 <li className="text-capitalize">{weatherData.description}</li>
             </ul>
 
@@ -53,9 +56,9 @@ return (
                 </div>
                 <div className="col-6">
                     <ul>
-                        <li>Precipitation: 3%</li>
+                        
                         <li>Humidity: {weatherData.humidity}%</li>
-                        <li>Wind: {weatherData.wind} mph</li>
+                        <li>Wind: {Math.round(weatherData.wind)} mph</li>
                     </ul>
                 </div>
 
@@ -64,8 +67,7 @@ return (
     )
 } else {
 const apiKey = "b6a67f67579bcd300971f2f49b91d214";
-    let city="Glasgow";
-    let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+    let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`
     axios.get(apiUrl).then(handleReponse);
 
     return "Loading.."

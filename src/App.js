@@ -8,7 +8,7 @@ export default function App() {
     <div className="App">
       <div className="container">
      
-     <Weather/>
+     <Weather defaultCity="Glasgow"/>
      <footer>
        This project was coded by <a href="https://admiring-sinoussi-3cc72d.netlify.app/">Nicole Gainska</a> and is {""}
      <a href="https://github.com/ngainska/new-react-weather" target="_blank" rel="noreferrer">
