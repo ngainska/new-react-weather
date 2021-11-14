@@ -5,7 +5,7 @@ import WeatherInfo from "./WeatherInfo";
 
 export default function Weather(props){
 const [weatherData, setweatherData]=useState({ready:false});
-const [city, setCity] = useState(props.defaultCity)
+const [city, setCity] = useState(props.defaultCity);
 function handleReponse(response){
     setweatherData({
         ready: true,
@@ -56,11 +56,11 @@ return (
 
             </div>
         
-    )
+    );
 } else {
 
 search();
-    return "Loading.."
+    return "Loading..";
 }
 
 }
