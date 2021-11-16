@@ -18,10 +18,19 @@ function handleResponse(response){
     setReady(true);
 }
 
+function load(){
+     const apiKey = "b6a67f67579bcd300971f2f49b91d214";
+    let lat= props.coordinates.lat;
+    let lon=props.coordinates.lon;
+    let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}&units=metric`;
+
+    axios.get(apiUrl).then(handleResponse);
+}
+
 if (ready) { 
     return (
     <div className="WeatherForecast">
-        <div className="row">
+        <div className="row mt-3">
             {forecast.map(function(dailyForecast,index){
                 if (index <5) {
                 return(
@@ -29,19 +38,14 @@ if (ready) {
                 <WeatherForecastDay data={dailyForecast}/>
             </div>
             );
-            }
+            } else {return null;}
             })}
             
         </div>
     </div>);
 }
  else {
-    const apiKey = "b6a67f67579bcd300971f2f49b91d214";
-    let lat= props.coordinates.lat;
-    let lon=props.coordinates.lon;
-    let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}&units=metric`;
-
-    axios.get(apiUrl).then(handleResponse);
+   load();
     
     return null;
    }
