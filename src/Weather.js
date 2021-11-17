@@ -5,6 +5,7 @@ import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
 
 export default function Weather(props){
+
 const [weatherData, setweatherData]=useState({ready:false});
 const [city, setCity] = useState(props.defaultCity);
 function handleReponse(response){
@@ -42,6 +43,10 @@ function updateCity(event){
 setCity(event.target.value);
 }
 
+
+
+const [passUnits, setPassUnits] = useState(`celsius`);
+
 if (weatherData.ready){
 return (
         <div className="Weather">
@@ -54,8 +59,8 @@ return (
                 </div>
                 </div>
             </form>
-<WeatherInfo data={weatherData}/>
-<WeatherForecast coordinates={weatherData.coordinates}/>
+<WeatherInfo data={weatherData} setPassUnits={setPassUnits}/>
+<WeatherForecast coordinates={weatherData.coordinates} passUnits={passUnits}/>
 
             </div>
         

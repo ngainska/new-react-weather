@@ -3,7 +3,7 @@ import "./WeatherForecast.css"
 import axios from "axios";
 import WeatherForecastDay from "./WeatherForecastDay";
 
-export default function WeatherForecast(props){
+export default function WeatherForecast(props, {passUnits}){
     let [ready, setReady]=useState(false);
     let [forecast, setForecast] = useState(null);
 
@@ -18,13 +18,21 @@ function handleResponse(response){
     setReady(true);
 }
 
+
 function load(){
      const apiKey = "b6a67f67579bcd300971f2f49b91d214";
     let lat= props.coordinates.lat;
     let lon=props.coordinates.lon;
+
+    if ({passUnits} === `celsius`) {
+
     let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}&units=metric`;
 
+    axios.get(apiUrl).then(handleResponse);} else {
+        let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}&units=imperial`;
+
     axios.get(apiUrl).then(handleResponse);
+    }
 }
 
 if (ready) { 

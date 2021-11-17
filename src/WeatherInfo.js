@@ -1,10 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import FormattedDate from "./FormattedDate";
 import WeatherIcon from "./WeatherIcon";
 import WeatherTemperature from "./WeatherTemperature";
 
 
-export default function WeatherInfo(props){
+export default function WeatherInfo(props, {setPassUnits}){
+   
+
+const [selectedUnits, setSelectedUnits] = useState(`setSelectedUnits`);
+
+
+setPassUnits(selectedUnits);
+
     return (
         <div className="WeatherInfo">
         <h1>{props.data.name}</h1>
@@ -22,7 +29,7 @@ export default function WeatherInfo(props){
                         <WeatherIcon code={props.data.icon} size={52}/>
                         </div>
                     <div className="float-left">
-                        <WeatherTemperature celsius={props.data.temperature}/>
+                        <WeatherTemperature celsius={props.data.temperature} setSelectedUnits={setSelectedUnits} />
                     </div>
                     </div>
                 </div>
