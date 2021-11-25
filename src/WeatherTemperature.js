@@ -1,14 +1,15 @@
 import React from "react";
 
-export default function WeatherTemperature(props, {setSelectedUnits}){
-    
-    //const [unit, setSelectedUnits] = useState("celsius");
-    const showFahrenheit=(unit) => {
-setSelectedUnits(`fahrenheit`);
+export default function WeatherTemperature(props){
+    console.log(props.passUnits);
+    const showFahrenheit=(event) => {
+        event.preventDefault();
+props.setPassUnits(`fahrenheit`);
     }
 
-const showCelsius=(unit) => {
-    setSelectedUnits(`celsius`);
+const showCelsius=(event) => {
+    event.preventDefault();
+    props.setPassUnits(`celsius`);
 }
 
 function fahrenheit(){
@@ -16,15 +17,17 @@ function fahrenheit(){
 }   
 
 
-    if (setSelectedUnits === `celsius`) {
+    if (props.passUnits === `celsius`) {
     return(
         <div className="WeatherTemperature">
             <span className="temperature">{Math.round(props.celsius)}</span>
-            <span className="unit">°C | {""}<a href="/" onClick={()=>showFahrenheit(`fahrenheit`)}>°F</a></span>
+            <span className="unit">°C | {""}<a href="/" onClick={showFahrenheit}>°F</a></span>
          </div>)} else {
              return (<div className="WeatherTemperature">
             <span className="temperature">{Math.round(fahrenheit())}</span>
-            <span className="unit"><a href="/" onClick={()=>showCelsius(`celsius`)}>°C</a> | °F</span>
+            <span className="unit"><a href="/" onClick={showCelsius}>°C</a> | °F</span>
          </div>)
          }
+         
 }
+

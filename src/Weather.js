@@ -59,7 +59,7 @@ return (
                 </div>
                 </div>
             </form>
-<WeatherInfo data={weatherData} setPassUnits={setPassUnits}/>
+<WeatherInfo data={weatherData} passUnits={passUnits} setPassUnits={setPassUnits}/>
 <WeatherForecast coordinates={weatherData.coordinates} passUnits={passUnits}/>
 
             </div>
